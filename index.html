@@ -13,5 +13,30 @@
   <div id="app"></div>
   <script src="config.js?v=2"></script>
   <script src="app.js?v=2"></script>
+<script data-goatcounter="https://sohwi-english.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function () {
+  var KEY = 'es_visitor_name';
+  var name = '';
+  try { name = localStorage.getItem(KEY) || ''; } catch (e) {}
+
+  if (!name) {
+    name = (prompt('이름을 입력해 주세요.\n(입력한 이름이 방문 기록에 남아요)') || '').trim();
+    if (name) { try { localStorage.setItem(KEY, name); } catch (e) {} }
+  }
+  if (!name) return;
+
+  var tries = 0;
+  var timer = setInterval(function () {
+    tries++;
+    if (window.goatcounter && window.goatcounter.count) {
+      clearInterval(timer);
+      window.goatcounter.count({ path: '방문자/' + name, title: name, event: true });
+    } else if (tries > 50) {
+      clearInterval(timer);
+    }
+  }, 200);
+})();
+</script>
 </body>
 </html>
